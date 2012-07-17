@@ -1,0 +1,2 @@
+serviceClass: com.dconapp.provider.client.GreetingService
+path: F139E78BA43B461B33E54ED8B87262BB.gwt.rpc

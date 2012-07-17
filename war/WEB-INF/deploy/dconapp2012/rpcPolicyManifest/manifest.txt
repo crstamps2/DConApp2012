@@ -1,0 +1,3 @@
+# Module dconapp2012
+# RPC service class, partial path of RPC policy file
+com.dconapp.provider.client.GreetingService, F139E78BA43B461B33E54ED8B87262BB.gwt.rpc
