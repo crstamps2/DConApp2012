@@ -9,16 +9,21 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
+import java.sql.SQLException;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dconapp.model.EventSlots;
+import com.dconapp.provider.dao.CommonSlotsDAO;
+import com.dconapp.provider.dao.wrappers.CommonSlotsDAOWrapper;
 import com.google.appengine.api.files.AppEngineFile;
 import com.google.appengine.api.files.FileService;
 import com.google.appengine.api.files.FileServiceFactory;
 import com.google.appengine.api.files.FileWriteChannel;
 import com.google.appengine.api.files.GSFileOptions.GSFileOptionsBuilder;
+import com.google.gson.Gson;
 
 /**
  * @author Cody
@@ -29,10 +34,18 @@ public class DataService extends HttpServlet {
 	
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse resp){
+
+		EventSlots events = null;
 		try{
 		InputStreamReader input = new InputStreamReader(req.getInputStream());
 		BufferedReader reader = new BufferedReader(input);
-		
+		CommonSlotsDAO dao = new CommonSlotsDAO();
+		try {
+			events = dao.executeQuery(new CommonSlotsDAOWrapper());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// Get the file service
 		FileService fileService = FileServiceFactory.getFileService();
 
@@ -81,7 +94,12 @@ public class DataService extends HttpServlet {
 		
 		// Finalize the object
 		writeChannel.closeFinally();
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(events);
+		System.out.println(json);
 		}
+		
 		catch (IOException ioe){
 			System.out.println(ioe.getMessage());
 		}
