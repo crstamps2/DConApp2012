@@ -9,7 +9,7 @@
   
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/dconapp2012/greet</url-pattern>
+    <url-pattern>/dconapp2012/*</url-pattern>
   </servlet-mapping>
  
   <!-- Default page to serve -->
@@ -30,5 +30,10 @@
     <servlet-name>SystemServiceServlet</servlet-name>
     <url-pattern>/_ah/spi/*</url-pattern>
   </servlet-mapping>
+  
+   <init-param> 
+    <param-name>com.sun.jersey.config.feature.DisableWADL</param-name> 
+    <param-value>true</param-value> 
+  </init-param>
 
 </web-app>
