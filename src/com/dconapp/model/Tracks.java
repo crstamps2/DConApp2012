@@ -17,7 +17,9 @@
 package com.dconapp.model;
 
 public class Tracks {
-    Track[] track;
+	//I don't know why Google decided this one wasn't going to be public but the rest would be? It's weird. 
+	//I'm modifying it  to be public
+    public Track[] track;
 
     public Track[] getTrack() {
         return track;
