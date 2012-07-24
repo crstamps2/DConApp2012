@@ -16,7 +16,7 @@ import com.google.appengine.api.rdbms.AppEngineDriver;
  */
 public class RoomsDAO extends CloudSQLDAO<Rooms> {
 
-	private final String STATEMENT_FOR_COMMON_SLOTS = "select id,name,floor from rooms;";
+	private final String STATEMENT_FOR_ROOMS = "select id,name,floor from rooms;";
 	
 	protected Integer executePreparedStatementForUpdate(
 			PreparedStatement preparedStatement) {
@@ -33,7 +33,7 @@ public class RoomsDAO extends CloudSQLDAO<Rooms> {
 	@Override
 	protected PreparedStatement generatePreparedStatementUsingConnection(
 			Connection c) throws SQLException {
-		PreparedStatement statement = c.prepareStatement(STATEMENT_FOR_COMMON_SLOTS);
+		PreparedStatement statement = c.prepareStatement(STATEMENT_FOR_ROOMS);
 		return statement;
 	}
 

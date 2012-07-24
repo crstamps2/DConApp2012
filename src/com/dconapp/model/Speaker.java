@@ -22,4 +22,8 @@ public class Speaker {
     public String plusone_url;
     public String thumbnail_url;
     public String user_id;
+    //built to serialize out for JSON not for the ANDROID side
+    public String first_name;
+    public String last_name;
+    public String speaker_id;
 }

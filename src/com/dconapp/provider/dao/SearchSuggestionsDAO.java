@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.dconapp.model.Tracks;
+import com.dconapp.model.SearchSuggestions;
 import com.google.appengine.api.rdbms.AppEngineDriver;
 
 /**
@@ -14,9 +14,9 @@ import com.google.appengine.api.rdbms.AppEngineDriver;
  * @author mrkaiser
  *
  */
-public class TracksDAO extends CloudSQLDAO<Tracks> {
+public class SearchSuggestionsDAO extends CloudSQLDAO<SearchSuggestions> {
 
-	private final String STATEMENT_FOR_TRACKS = "select name,color,abstract from tracks;";
+	private final String STATEMENT_FOR_WORDS = "select word from words;";
 	
 	protected Integer executePreparedStatementForUpdate(
 			PreparedStatement preparedStatement) {
@@ -33,7 +33,7 @@ public class TracksDAO extends CloudSQLDAO<Tracks> {
 	@Override
 	protected PreparedStatement generatePreparedStatementUsingConnection(
 			Connection c) throws SQLException {
-		PreparedStatement statement = c.prepareStatement(STATEMENT_FOR_TRACKS);
+		PreparedStatement statement = c.prepareStatement(STATEMENT_FOR_WORDS);
 		return statement;
 	}
 

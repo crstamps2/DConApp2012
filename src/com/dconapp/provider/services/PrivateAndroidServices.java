@@ -12,12 +12,18 @@ import javax.ws.rs.core.MediaType;
 
 import com.dconapp.model.EventSlots;
 import com.dconapp.model.Rooms;
+import com.dconapp.model.SearchSuggestions;
+import com.dconapp.model.SpeakersResponse;
 import com.dconapp.model.Tracks;
 import com.dconapp.provider.dao.CommonSlotsDAO;
 import com.dconapp.provider.dao.RoomsDAO;
+import com.dconapp.provider.dao.SearchSuggestionsDAO;
+import com.dconapp.provider.dao.SpeakersDAO;
 import com.dconapp.provider.dao.TracksDAO;
 import com.dconapp.provider.dao.wrappers.CommonSlotsDAOWrapper;
 import com.dconapp.provider.dao.wrappers.RoomsDAOWrapper;
+import com.dconapp.provider.dao.wrappers.SearchSuggestionsDAOWrapper;
+import com.dconapp.provider.dao.wrappers.SpeakersDAOWrapper;
 import com.dconapp.provider.dao.wrappers.TracksDAOWrapper;
 import com.google.gson.Gson;
 
@@ -68,4 +74,27 @@ public class PrivateAndroidServices{
 		String returnable = gson.toJson(rooms);
 		return returnable;
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/searchsuggestions")
+	public String buildSearchSuggestions() throws SQLException{
+		SearchSuggestionsDAO dao  = new SearchSuggestionsDAO();
+		SearchSuggestions suggestions = dao.executeQuery(new SearchSuggestionsDAOWrapper());
+		Gson gson = new Gson();
+		String returnable = gson.toJson(suggestions);
+		return returnable;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/speakers")
+	public String buildSpeakers() throws SQLException{
+		SpeakersDAO dao  = new SpeakersDAO();
+		SpeakersResponse sr = dao.executeQuery(new SpeakersDAOWrapper() );
+		Gson gson = new Gson();
+		String returnable = gson.toJson(sr);
+		return returnable;
+	}
+	
 }
